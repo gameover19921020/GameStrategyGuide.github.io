@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title id="title">武器选择：先练一近一远</title>
+  <desc id="desc">Original guide illustration for NARAKA: BLADEPOINT.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#151515"/>
+      <stop offset="58%" stop-color="#31413e"/>
+      <stop offset="100%" stop-color="#b83624"/>
+    </linearGradient>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="2" fill="#d49b37" opacity=".11"/>
+    </pattern>
+  </defs>
+  <rect width="960" height="560" fill="url(#bg)"/>
+  <rect width="960" height="560" fill="url(#dots)"/>
+  <rect x="54" y="52" width="852" height="456" rx="18" fill="#d49b37" opacity=".08" stroke="#d49b37" stroke-opacity=".28"/>
+  <path d="M106 390 L248 282 L388 328 L520 188 L674 238 L850 122" fill="none" stroke="#d49b37" stroke-opacity=".55" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#d49b37" opacity=".82">
+    <circle cx="106" cy="390" r="13"/>
+    <circle cx="248" cy="282" r="13"/>
+    <circle cx="388" cy="328" r="13"/>
+    <circle cx="520" cy="188" r="13"/>
+    <circle cx="674" cy="238" r="13"/>
+    <circle cx="850" cy="122" r="13"/>
+  </g>
+  <rect x="84" y="82" width="158" height="44" rx="22" fill="#b83624" opacity=".95"/>
+  <text x="110" y="112" fill="#d49b37" font-family="'Avenir Next', 'Segoe UI', sans-serif" font-size="22" font-weight="800">BUILD</text>
+  <text x="84" y="180" fill="#d49b37" font-family="Georgia, 'Songti SC', serif" font-size="42" font-weight="800">武器选择：先练一近一远</text>
+  <text x="86" y="232" fill="#d49b37" opacity=".76" font-family="'Avenir Next', 'Segoe UI', sans-serif" font-size="24">NARAKA: BLADEPOINT</text>
+  <text x="86" y="464" fill="#d49b37" opacity=".78" font-family="'Avenir Next', 'Segoe UI', sans-serif" font-size="22">13 min · difficulty 3/3</text>
+  <rect x="710" y="370" width="138" height="138" rx="18" fill="#151515" opacity=".28" stroke="#d49b37" stroke-opacity=".28"/>
+  <text x="748" y="452" fill="#d49b37" font-family="'Avenir Next', 'Segoe UI', sans-serif" font-size="48" font-weight="800">03</text>
+</svg>
