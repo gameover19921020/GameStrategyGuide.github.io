@@ -3,26 +3,12 @@ const path = require("path");
 const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
-const appText = fs.readFileSync(path.join(root, "app.js"), "utf8");
-
-function grab(name, nextName) {
-  const pattern = new RegExp(`const ${name} = ([\\s\\S]*?)\\n\\nconst ${nextName}`);
-  const match = appText.match(pattern);
-  if (!match) throw new Error(`Could not find ${name}`);
-  return `const ${name} = ${match[1]}`;
-}
-
-const dataCode = [
-  grab("art", "games"),
-  grab("games", "guideMeta"),
-  `${appText.match(/const guideMeta = \[([\s\S]*?)\n\];/)[0]}`,
-  "globalThis.__data = { games, guideMeta };",
-].join("\n\n");
+const dataText = fs.readFileSync(path.join(root, "data", "content.js"), "utf8");
 
 const context = {};
-vm.runInNewContext(dataCode, context);
+vm.runInNewContext(dataText, context);
 
-const { games, guideMeta } = context.__data;
+const { games, guideMeta } = context.GameOriContent;
 const gameDir = path.join(root, "assets", "games");
 const guideDir = path.join(root, "assets", "guides");
 fs.mkdirSync(gameDir, { recursive: true });
@@ -91,7 +77,7 @@ function gameSvg(id, game) {
   </g>
   <text x="108" y="170" fill="${paper}" font-family="Georgia, 'Songti SC', serif" font-size="64" font-weight="800">${escapeXml(short(game.name, 28))}</text>
   <text x="112" y="230" fill="${paper}" opacity=".78" font-family="'Avenir Next', 'Segoe UI', sans-serif" font-size="30">${escapeXml(game.cn)} · ${escapeXml(game.genre)}</text>
-  <text x="112" y="586" fill="${paper}" opacity=".86" font-family="'Avenir Next', 'Segoe UI', sans-serif" font-size="24" font-weight="800">LONGMEN GUIDE FILE</text>
+  <text x="112" y="586" fill="${paper}" opacity=".86" font-family="'Avenir Next', 'Segoe UI', sans-serif" font-size="24" font-weight="800">GAMEORI GUIDE FILE</text>
   <text x="915" y="590" fill="${paper}" opacity=".72" font-family="'Avenir Next', 'Segoe UI', sans-serif" font-size="22">${escapeXml(game.studio)}</text>
 </svg>`;
 }

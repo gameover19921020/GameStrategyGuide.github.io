@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>龙门攻略库 | Chinese Game Guides</title>
+    <title>GameOri | Chinese Game Guides</title>
     <meta
       name="description"
-      content="A multilingual guide hub for global players discovering Chinese games, builds, boss tactics, farming routes, and beginner guides."
+      content="GameOri is an origin-aware guide hub for Chinese games, combining source-tracked guides, Eastern game context, beginner routes, and multilingual navigation."
     />
     <script
       async
@@ -18,18 +18,19 @@
   <body>
     <div class="shell">
       <header class="topbar" aria-label="Primary">
-        <a class="brand" href="#" aria-label="Home">
-          <span class="brand-mark" aria-hidden="true">门</span>
+        <a class="brand" href="index.html" aria-label="Home">
+          <span class="brand-mark" aria-hidden="true">G</span>
           <span>
-            <strong data-i18n="brand">龙门攻略库</strong>
-            <small data-i18n="brandSub">中国游戏全球攻略索引</small>
+            <strong data-i18n="brand">GameOri</strong>
+            <small data-i18n="brandSub">中国游戏攻略与新手引导</small>
           </span>
         </a>
 
         <nav class="nav-links" aria-label="Sections">
-          <a href="#guides" data-i18n="navGuides">攻略</a>
-          <a href="#games" data-i18n="navGames">游戏</a>
-          <a href="#submit" data-i18n="navSubmit">投稿</a>
+          <a href="index.html#guides" data-i18n="navGuides">攻略</a>
+          <a href="index.html#tools" data-i18n="navTools">工具</a>
+          <a href="index.html#guides" data-i18n="navGames">游戏</a>
+          <a href="index.html#submit" data-i18n="navSubmit">投稿</a>
         </nav>
 
         <div class="top-actions">
@@ -44,10 +45,10 @@
         <section class="command-deck" aria-labelledby="pageTitle">
           <canvas id="heroCanvas" aria-hidden="true"></canvas>
           <div class="deck-copy">
-            <p class="eyebrow" data-i18n="eyebrow">多语言中国游戏攻略站</p>
-            <h1 id="pageTitle" data-i18n="headline">让全球玩家读懂中国游戏</h1>
+            <p class="eyebrow" data-i18n="eyebrow">Origin + Oriental game guides</p>
+            <h1 id="pageTitle" data-i18n="headline">GameOri，从源头读懂中国游戏</h1>
             <p class="lead" data-i18n="lead">
-              按游戏专题组织入门、养成、战斗、资源、Boss 和版本攻略，让海外玩家能从一款游戏进入完整攻略系列。
+              Ori 融合 Origin 与 Oriental：用透明来源、中文术语解释和新手路线，帮助全球玩家跨过语言与系统门槛。
             </p>
           </div>
           <div class="deck-metrics" aria-label="Site metrics">
@@ -64,6 +65,83 @@
               <span data-i18n="metricGames">中国游戏</span>
             </article>
           </div>
+        </section>
+
+        <section class="brand-origin" aria-labelledby="brandOriginTitle">
+          <div>
+            <p class="eyebrow" data-i18n="brandOriginEyebrow">为什么叫 GameOri</p>
+            <h2 id="brandOriginTitle" data-i18n="brandOriginTitle">游戏攻略的东方源点</h2>
+          </div>
+          <div class="origin-grid">
+            <article>
+              <span>Origin</span>
+              <strong data-i18n="originSourceTitle">来源透明</strong>
+              <p data-i18n="originSourceText">每篇攻略保留资料来源、适用版本和编辑状态，方便玩家判断内容是否可信。</p>
+            </article>
+            <article>
+              <span>Oriental</span>
+              <strong data-i18n="originEastTitle">读懂东方游戏语境</strong>
+              <p data-i18n="originEastText">聚焦中国游戏里的中文术语、系统逻辑和玩法表达，降低跨文化理解成本。</p>
+            </article>
+            <article>
+              <span>On-ramp</span>
+              <strong data-i18n="originGuideTitle">新手入口与攻略工具</strong>
+              <p data-i18n="originGuideText">把游戏拆成专题、路线、FAQ 和资源清单，适合做攻略工具站与多语言引导站。</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="guide-tools" id="tools" aria-labelledby="toolsTitle">
+          <div class="tools-head">
+            <div>
+              <p class="eyebrow" data-i18n="toolsEyebrow">攻略工具</p>
+              <h2 id="toolsTitle" data-i18n="toolsTitle">先查术语，再走路线</h2>
+            </div>
+            <p data-i18n="toolsLead">把中文术语、相关攻略和新手阅读顺序集中在一处。</p>
+          </div>
+
+          <div class="tools-grid">
+            <section class="tool-panel glossary-panel" aria-labelledby="glossaryTitle">
+              <div class="tool-panel-head">
+                <div>
+                  <p class="field-label" data-i18n="glossaryEyebrow">术语词典</p>
+                  <h3 id="glossaryTitle" data-i18n="glossaryTitle">中文系统术语</h3>
+                </div>
+                <span id="glossaryCount"></span>
+              </div>
+              <div class="tool-controls">
+                <div class="search-box">
+                  <span aria-hidden="true">⌕</span>
+                  <input id="glossarySearch" type="search" autocomplete="off" data-i18n-placeholder="glossaryPlaceholder" />
+                </div>
+                <select id="glossaryGameSelect" aria-label="Glossary game filter"></select>
+              </div>
+              <div class="term-list" id="termList"></div>
+            </section>
+
+            <section class="tool-panel route-panel" aria-labelledby="starterToolTitle">
+              <div class="tool-panel-head">
+                <div>
+                  <p class="field-label" data-i18n="starterToolEyebrow">新手路线</p>
+                  <h3 id="starterToolTitle" data-i18n="starterToolTitle">一款游戏该先看什么</h3>
+                </div>
+              </div>
+              <div class="tool-controls single-control">
+                <select id="starterGameSelect" aria-label="Starter route game"></select>
+              </div>
+              <div id="starterRouteTool"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="home-media" id="homeMedia" aria-labelledby="homeMediaTitle">
+          <div class="home-media-head">
+            <div>
+              <p class="eyebrow" data-i18n="homeMediaEyebrow">编辑推荐</p>
+              <h2 id="homeMediaTitle" data-i18n="homeMediaTitle">今天先读这些攻略</h2>
+            </div>
+          </div>
+          <div class="home-media-grid" id="homeMediaGrid"></div>
         </section>
 
         <section class="workspace" id="guides">
@@ -89,6 +167,7 @@
             <div class="rail-section submit-note" id="submit">
               <p data-i18n="submitTitle">缺少你的游戏？</p>
               <span data-i18n="submitText">提交游戏、攻略主题或资料来源，编辑审核后加入专题库。</span>
+              <a class="submit-email" id="submitEmailLink" href="mailto:boy736809040@gmail.com">boy736809040@gmail.com</a>
               <button class="text-action" type="button" id="submitButton" data-i18n="submitButton">提交攻略线索</button>
             </div>
           </aside>
@@ -117,16 +196,16 @@
         <section class="game-index" id="games" aria-labelledby="gamesTitle" hidden>
           <div id="gameDetail"></div>
         </section>
+
+        <section class="article-index" id="articlePage" hidden>
+          <div id="articleDetail"></div>
+        </section>
       </main>
     </div>
 
-    <dialog class="guide-dialog" id="guideDialog">
-      <button class="dialog-close" type="button" id="closeDialog" aria-label="Close">×</button>
-      <div id="dialogContent"></div>
-    </dialog>
-
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+    <script src="./data/content.js"></script>
     <script src="./app.js"></script>
   </body>
 </html>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Marvel Rivals guide cover</title>
+  <desc id="desc">Original editorial cover image for 漫威争锋.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#151515"/>
+      <stop offset="52%" stop-color="#b83624"/>
+      <stop offset="100%" stop-color="#d49b37"/>
+    </linearGradient>
+    <pattern id="grid" width="54" height="54" patternUnits="userSpaceOnUse">
+      <path d="M54 0H0V54" fill="none" stroke="#fffaf0" stroke-opacity=".08"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <rect width="1200" height="720" fill="url(#grid)"/>
+  <circle cx="890" cy="190" r="150" fill="#fffaf0" opacity=".12"/>
+  <circle cx="985" cy="485" r="235" fill="#151515" opacity=".2"/>
+  <path d="M115 540 C260 330 410 620 575 350 S925 250 1084 108" fill="none" stroke="#fffaf0" stroke-opacity=".35" stroke-width="8"/>
+  <g fill="none" stroke="#fffaf0" stroke-width="2" opacity=".42">
+    <rect x="88" y="82" width="1024" height="556" rx="18"/>
+    <path d="M88 485H1112M330 82V638M778 82V638"/>
+  </g>
+  <text x="108" y="170" fill="#fffaf0" font-family="Georgia, 'Songti SC', serif" font-size="64" font-weight="800">Marvel Rivals</text>
+  <text x="112" y="230" fill="#fffaf0" opacity=".78" font-family="'Avenir Next', 'Segoe UI', sans-serif" font-size="30">漫威争锋 · Hero shooter</text>
+  <text x="112" y="586" fill="#fffaf0" opacity=".86" font-family="'Avenir Next', 'Segoe UI', sans-serif" font-size="24" font-weight="800">GAMEORI GUIDE FILE</text>
+  <text x="915" y="590" fill="#fffaf0" opacity=".72" font-family="'Avenir Next', 'Segoe UI', sans-serif" font-size="22">NetEase Games</text>
+</svg>
