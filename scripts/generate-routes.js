@@ -126,7 +126,7 @@ function writePage(relativePath, html) {
   fs.writeFileSync(path.join(dir, "index.html"), html);
 }
 
-const sitemapUrls = ["index.html"];
+const sitemapUrls = ["index.html", "submit/"];
 
 Object.entries(games).forEach(([id, game]) => {
   const guides = guideMeta.filter((guide) => guide.game === id);

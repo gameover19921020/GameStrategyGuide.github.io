@@ -91,6 +91,13 @@ const copy = {
     topicRadar: "资源雷达",
     topicRadarHint: "高频术语与资源",
     topicLatestGuide: "最新攻略",
+    topicVersionStatus: "版本时效",
+    topicVersionStable: "版本状态稳定",
+    topicVersionReview: "需要复核",
+    topicVersionLatest: "最近校验",
+    topicVersionFresh: "新近校验",
+    topicVersionWatch: "持续观察",
+    topicVersionStale: "可能过期",
     gamesEyebrow: "游戏索引",
     gamesTitle: "游戏专题",
     openGame: "进入专题",
@@ -119,6 +126,10 @@ const copy = {
     breadcrumbGames: "游戏专题",
     articleUpdated: "最后更新",
     articleApplies: "适用版本",
+    articleFreshness: "时效状态",
+    articleFresh: "新近校验",
+    articleWatch: "持续观察",
+    articleStale: "可能过期",
     articleSourceCount: "来源数量",
     articleReviewStatus: "编辑状态",
     articleReviewText: "已按目标、准备、路线、误区和术语完成基础审核，后续根据版本变化继续补充。",
@@ -220,6 +231,13 @@ const copy = {
     topicRadar: "Resource radar",
     topicRadarHint: "Frequent terms and resources",
     topicLatestGuide: "Latest guide",
+    topicVersionStatus: "Version status",
+    topicVersionStable: "Coverage looks current",
+    topicVersionReview: "Needs review",
+    topicVersionLatest: "Latest check",
+    topicVersionFresh: "Fresh",
+    topicVersionWatch: "Watching",
+    topicVersionStale: "May be outdated",
     gamesEyebrow: "Game index",
     gamesTitle: "Game page",
     openGame: "Open page",
@@ -248,6 +266,10 @@ const copy = {
     breadcrumbGames: "Game pages",
     articleUpdated: "Last updated",
     articleApplies: "Applies to",
+    articleFreshness: "Freshness",
+    articleFresh: "Fresh",
+    articleWatch: "Watching",
+    articleStale: "May be outdated",
     articleSourceCount: "Sources",
     articleReviewStatus: "Editorial status",
     articleReviewText: "Reviewed as a practical guide with goal, prep, route, mistakes, and terminology. It will keep evolving with patches.",
@@ -580,6 +602,19 @@ function formatGuideDate(value) {
   return new Intl.DateTimeFormat(locale, { month: "short", day: "numeric" }).format(new Date(`${value}T00:00:00+08:00`));
 }
 
+function guideAgeDays(guide) {
+  const updated = new Date(`${guide.updated}T00:00:00+08:00`);
+  const diff = Date.now() - updated.getTime();
+  return Math.max(0, Math.floor(diff / 86400000));
+}
+
+function guideFreshness(guide) {
+  const age = guideAgeDays(guide);
+  if (age <= 30) return { key: "fresh", label: t("articleFresh"), age };
+  if (age <= 90) return { key: "watch", label: t("articleWatch"), age };
+  return { key: "stale", label: t("articleStale"), age };
+}
+
 function guideAppliesTo(guide) {
   const game = games[guide.game];
   if (guide.type === "meta") return `${game.cn} 当前赛季 / 版本目标`;
@@ -589,9 +624,11 @@ function guideAppliesTo(guide) {
 }
 
 function guideStatusCards(guide) {
+  const freshness = guideFreshness(guide);
   return [
     { label: t("articleUpdated"), value: formatGuideDate(guide.updated) },
     { label: t("articleApplies"), value: guideAppliesTo(guide) },
+    { label: t("articleFreshness"), value: freshness.label },
     { label: t("articleSourceCount"), value: `${guide.sources.length} ${t("topicSources")}` },
     { label: t("articleReviewStatus"), value: t("articleReviewText") },
   ];
@@ -756,7 +793,7 @@ function applyCopy() {
   if (guidesLink) guidesLink.href = anchorPath("index.html#guides");
   if (toolsLink) toolsLink.href = anchorPath("index.html#tools");
   if (gamesLink) gamesLink.href = anchorPath("index.html#guides");
-  if (submitLink) submitLink.href = anchorPath("index.html#submit");
+  if (submitLink) submitLink.href = anchorPath("submit/");
 }
 
 function chip(label, value, group, active) {
@@ -965,6 +1002,18 @@ function topicResourceRows(grouped) {
     const latest = [...items].sort((a, b) => new Date(b.updated) - new Date(a.updated))[0];
     return { type, count: items.length, latest, resources: topResourcesForGuides(items, 4) };
   });
+}
+
+function topicVersionSummary(guides) {
+  const latest = [...guides].sort((a, b) => new Date(b.updated) - new Date(a.updated))[0];
+  const counts = guides.reduce(
+    (acc, guide) => {
+      acc[guideFreshness(guide).key] += 1;
+      return acc;
+    },
+    { fresh: 0, watch: 0, stale: 0 },
+  );
+  return { latest, counts };
 }
 
 function glossaryEntries() {
@@ -1354,6 +1403,7 @@ function renderGameDetail() {
   const problemCards = topicProblemCards(grouped);
   const stageLanes = topicStageLanes(gameGuides);
   const radarRows = topicResourceRows(grouped);
+  const versionSummary = topicVersionSummary(gameGuides);
   const latestGuide = [...gameGuides].sort((a, b) => new Date(b.updated) - new Date(a.updated))[0];
   const focusGuide = readingPath[0] || gameGuides[0];
   const anchoredTypes = new Set();
@@ -1411,6 +1461,18 @@ function renderGameDetail() {
         <strong>${game.sources.length}</strong>
         <p>${game.sources.map((source) => source.label).join(" · ")}</p>
       </article>
+    </section>
+    <section class="topic-version-strip">
+      <div>
+        <p class="field-label">${t("topicVersionStatus")}</p>
+        <h3>${versionSummary.counts.stale ? `${versionSummary.counts.stale} ${t("topicVersionReview")}` : t("topicVersionStable")}</h3>
+        <p>${t("topicVersionLatest")}：${versionSummary.latest.title} · ${formatGuideDate(versionSummary.latest.updated)}</p>
+      </div>
+      <div class="version-metrics">
+        <article class="freshness-fresh"><strong>${versionSummary.counts.fresh}</strong><span>${t("topicVersionFresh")}</span></article>
+        <article class="freshness-watch"><strong>${versionSummary.counts.watch}</strong><span>${t("topicVersionWatch")}</span></article>
+        <article class="freshness-stale"><strong>${versionSummary.counts.stale}</strong><span>${t("topicVersionStale")}</span></article>
+      </div>
     </section>
     <section class="topic-reading-path">
       <div class="topic-reading-copy">
@@ -1561,6 +1623,7 @@ function renderArticleDetail() {
     .slice(0, 5);
   const terms = guide.resources.map((resource) => ({ term: resource, description: explainTerm(resource, game) }));
   const statusCards = guideStatusCards(guide);
+  const freshness = guideFreshness(guide);
 
   detail.innerHTML = `
     <article class="article-shell">
@@ -1580,6 +1643,7 @@ function renderArticleDetail() {
           <span>${guide.minutes} ${t("minutes")}</span>
           <span>${t("difficulty")} ${guide.difficulty}/3</span>
           <span>${t("articleUpdated")} ${formatGuideDate(guide.updated)}</span>
+          <span class="freshness-chip freshness-${freshness.key}">${freshness.label}</span>
         </div>
         <h1>${guide.title}</h1>
         <p>${guide.summary}</p>

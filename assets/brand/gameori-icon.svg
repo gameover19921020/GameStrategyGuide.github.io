@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="GameOri">
+  <rect width="512" height="512" rx="96" fill="#151515"/>
+  <path d="M116 128h280v68H188v120c0 42 22 68 66 68 26 0 52-9 72-27v-60h-86v-64h158v150c-36 43-86 65-150 65-86 0-146-52-146-134V128z" fill="#fffaf0"/>
+  <path d="M312 122h84v84" fill="none" stroke="#d49b37" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="352" cy="160" r="18" fill="#b83624"/>
+</svg>
